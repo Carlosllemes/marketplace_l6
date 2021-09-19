@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\{Store, User};
 use App\Http\Requests\StoreRequest;
 use App\Http\Controllers\Controller;
@@ -12,14 +11,14 @@ class StoreController extends Controller
 
     public function __construct(Store $stores)
     {
+        $this->middleware('user.has.store')->only('create', 'store');
         $this->stores = $stores;
     }
 
 
     public function index(){
-
-        $stores = $this->stores->paginate(10);
-        return view('admin.stores.stores', compact('stores'));
+        $store = auth()->user()->store;
+        return view('admin.stores.stores', compact('store'));
     }
 
     public function create()

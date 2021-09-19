@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(!$store)
     <a href="{{route('admin.stores.create')}}" class="mt-3 btn btn-success">Criar Loja</a>
+    @endif
     <table class="table table-striped">
         <thead>
         <tr>
@@ -12,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach( $stores as $store)
+
         <tr>
             <th scope="row">{{$store->id}}</th>
             <td>{{$store->name}}</td>
@@ -27,9 +29,8 @@
                 </div>
             </td>
         </tr>
-        @endforeach
 
         </tbody>
     </table>
-    {{$stores->links()}}
+
 @endsection
