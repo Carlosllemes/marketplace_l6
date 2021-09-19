@@ -35,16 +35,7 @@
         <div class="col-4">
             <label for="Slug" class="form-label">Slug</label>
             <input type="text" name="slug" id="id-5" class="form-control">
-
         </div>
-{{--        <div class="col-4">--}}
-{{--            <label for="Usuario" class="form-label">Usuario</label>--}}
-{{--            <select class="form-control" name="user" id="id-6">--}}
-{{--                @foreach($clientes as $cliente)--}}
-{{--                    <option value="{{$cliente->id}}">{{$cliente->name}}</option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-{{--        </div>--}}
     </div>
             <button type="submit" class="btn btn-success btn-lg mt-3">Criar</button>
         </form>

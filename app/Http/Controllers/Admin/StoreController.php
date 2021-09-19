@@ -31,11 +31,11 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->all();
-        $user = User::find($data['user']);
-        $store = $user->store()->create($data);
+        $user = auth()->user();
+        $user->store()->create($data);
 
         flash('Loja Criada com sucesso')->success();
-        return redirect()->back();
+        return redirect()->route('admin.stores.index');
     }
 
     public function edit($store)
@@ -62,7 +62,7 @@ class StoreController extends Controller
         $store->delete();
 
         flash('Loja Removida com sucesso')->success();
-        return redirect()->route('admin.stores.destroy');
+        return redirect()->route('admin.stores.index');
     }
 
 
