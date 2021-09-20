@@ -10,6 +10,7 @@
             <th scope="col">Preco</th>
             <th scope="col">Acoes</th>
 
+
         </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
             <th scope="row">{{$p->id}}</th>
             <td>{{$p->name}}</td>
             <td>R$ {{number_format($p->price, 2, ',' , '.')}}</td>
+
             <td>
                <div class="btn btn-group">
                    <a href="{{route('admin.products.edit', $p->id)}}" class="btn btn-primary">Editar</a>

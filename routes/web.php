@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth']], function(){
             Route::delete('/destroy/{store}/', 'StoreController@destroy')->name('destroy');
         });
         Route::resource('products', 'ProductController');
+        Route::resource('categories', 'CategoryController');
+
     });
 });
 

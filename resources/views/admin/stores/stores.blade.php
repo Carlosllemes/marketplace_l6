@@ -9,8 +9,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nome</th>
+            <th scope="col">Produtos</th>
             <th scope="col">Acoes</th>
-
         </tr>
         </thead>
         <tbody>
@@ -18,6 +18,8 @@
         <tr>
             <th scope="row">{{$store->id}}</th>
             <td>{{$store->name}}</td>
+            <td>{{$store->product->count()}}</td>
+
             <td>
                 <div class="btn-group">
                 <a href="{{route('admin.stores.edit', $store->id)}}" class="btn btn-primary">Editar</a>

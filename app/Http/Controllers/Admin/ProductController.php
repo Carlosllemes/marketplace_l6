@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
-        $store = Store::find($data['store']);
+        $store = auth()->user()->store;
         $store->product()->create($data);
 
         flash('Produto Criado com Sucesso')->success();
