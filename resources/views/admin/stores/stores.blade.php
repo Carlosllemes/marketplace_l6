@@ -15,6 +15,7 @@
         </thead>
         <tbody>
 
+        @if($store)
         <tr>
             <th scope="row">{{$store->id}}</th>
             <td>{{$store->name}}</td>
@@ -31,6 +32,8 @@
                 </div>
             </td>
         </tr>
+        @endif
+
 
         </tbody>
     </table>

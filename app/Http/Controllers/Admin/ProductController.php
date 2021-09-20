@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Store;
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
@@ -28,10 +29,11 @@ class ProductController extends Controller
 
     public function create()
     {
+        $categories = Category::all();
         $stores = Store::all();
         $products = $this->product->all();
 
-        return view('admin.products.create', compact('products', 'stores'));
+        return view('admin.products.create', compact('products', 'stores', 'categories'));
 
     }
 

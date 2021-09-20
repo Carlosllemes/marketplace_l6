@@ -7,7 +7,7 @@
     <div class="row g-4">
         <div class="col-6">
             <label for="Nome" class="form-label">Nome</label>
-            <input type="text" name="name" value="{{old('name')}}" id="id-1" class="form-control" value="{{$products->name}}">
+            <input type="text" name="name" value="{{old('name')}} " id="id-1" class="form-control" >
         </div>
         <div class="col-6">
             <label for="Descriacao" class="form-label">Descriacao</label>

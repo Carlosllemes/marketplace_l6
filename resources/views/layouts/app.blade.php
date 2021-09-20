@@ -36,10 +36,13 @@
                     @auth
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item @if(request()->is('admin/products*')) active @endif" >
-                            <a class="nav-link"  href="{{route('admin.products.index')}}">Produtos</a>
+                            <a title="Produtos" class="nav-link"  href="{{route('admin.products.index')}}">Produtos</a>
                         </li>
                         <li class="nav-item @if(request()->is('admin/stores*')) active @endif">
-                            <a class="nav-link" href="{{route('admin.stores.index')}}">Lojas</a>
+                            <a title="Lojas" class="nav-link" href="{{route('admin.stores.index')}}">Lojas</a>
+                        </li>
+                        <li class="nav-item @if(request()->is('admin/categories*')) active @endif">
+                            <a title="Categorias" class="nav-link" href="{{route('admin.categories.index')}}">Categorias</a>
                         </li>
                     </ul>
                     @endauth
