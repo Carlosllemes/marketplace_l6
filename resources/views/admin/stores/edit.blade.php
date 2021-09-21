@@ -25,6 +25,7 @@
             <input type="text" name="slug" id="id-5" class="form-control" value="{{$store->slug}}">
         </div>
 
+
     </div>
             <button type="submit" class="btn btn-success btn-lg mt-3">Editar</button>
         </form>

@@ -7,25 +7,35 @@
     <div class="row g-4">
         <div class="col-6">
             <label for="Nome" class="form-label">Nome</label>
-            <input type="text" name="name" value="{{old('name')}} " id="id-1" class="form-control" >
+            <input type="text" name="name" value="{{$products->name}} " id="id-1" class="form-control" >
         </div>
         <div class="col-6">
             <label for="Descriacao" class="form-label">Descriacao</label>
-            <input type="text" name="description" value="{{old('description')}}" id="id-2" class="form-control" value="{{$products->description}}">
+            <input type="text" name="description" value="{{$products->description}}" id="id-2" class="form-control" value="{{$products->description}}">
         </div>
         <div class="col-12">
             <label for="Conteudo" class="form-label">Conteudo</label>
-            <textarea name="body" value="{{old('body')}}"  cols="30" rows="10" class="form-control">{{$products->body}}</textarea>
+            <textarea name="body" value="{{$products->body}}"  cols="30" rows="10" class="form-control">{{$products->body}}</textarea>
         </div>
         <div class="col-4">
             <label for="Preco" class="form-label">Preco</label>
-            <input type="text" name="price" value="{{old('price')}}" id="id-4" class="form-control" value="{{$products->price}}">
+            <input type="text" name="price" value="{{$products->price}}" id="id-4" class="form-control" value="{{$products->price}}">
         </div>
         <div class="col-4">
             <label for="Slug" class="form-label">Slug</label>
-            <input type="text" name="slug" value="{{old('slug')}}" id="id-5" class="form-control" value="{{$products->slug}}">
+            <input type="text" name="slug" value="{{$products->slug}}" id="id-5" class="form-control" value="{{$products->slug}}">
         </div>
 
+        <div class="col-6">
+            <label class="form-label mt-2">Categorias</label>
+            <select name="categories[]" class="form-control" multiple="categories[]">
+                @foreach( $categories as $c)
+                    <option value="{{$c->id}}"  @if($products->categories->contains($c)) selected @endif>
+                        {{$c->name}}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
     </div>
             <button type="submit" class="btn btn-success btn-lg mt-3">Editar</button>
