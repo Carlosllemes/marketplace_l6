@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-        <form action="{{route('admin.products.store')}}" method="POST">
+        <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
     <div class="row g-4">
         <div class="col-6">
@@ -32,10 +32,7 @@
             <span class="invalid-feedback">{{$message}}</span>
             @enderror
         </div>
-        <div class="col-6">
-            <label for="Slug" class="form-label mt-2">Slug</label>
-            <input type="text" name="slug" id="id-5" value="{{old('slug')}}" class="form-control">
-        </div>
+
 
         <div class="col-6">
             <label class="form-label mt-2">Categorias</label>
@@ -44,6 +41,16 @@
                     <option value="{{$c->id}}">{{$c->name}}</option>
             @endforeach
             </select>
+        </div>
+
+        <div class="col-6">
+            <label for="Slug" class="form-label mt-2">Slug</label>
+            <input type="text" name="slug" id="id-5" value="{{old('slug')}}" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <label for="image" class="form-label">Imagem</label>
+            <input name="images[]" multiple type="file" class="form-control">
         </div>
 
     </div>
