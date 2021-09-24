@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
-use App\Store;
+use App\{Product, Category};
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
-use App\Product;
 use \Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,6 +22,7 @@ class ProductController extends Controller
     {
         $userStore = auth()->user()->store;
         $products = $userStore->product()->paginate(10);
+
         return view('admin.products.index', compact('products'));
     }
 
@@ -52,6 +51,7 @@ class ProductController extends Controller
         }
 
 
+
         flash('Produto Criado com Sucesso')->success();
         return  redirect()->route('admin.products.index');
 
@@ -68,6 +68,7 @@ class ProductController extends Controller
         $products = $this->product->find($product);
         $categories = Category::all(['id', 'name']);
 
+
         return view('admin.products.edit', compact('products', 'categories'));
     }
 
@@ -77,7 +78,14 @@ class ProductController extends Controller
         $data = $request->all();
         $product = $this->product->find($product);
         $product->categories()->sync($data['categories']);
+
+        if($request->hasFile('images')){
+            $images = $this->imageUpload($request, 'image');
+            $product->images()->createMany($images);
+        }
+
         $product->update($data);
+
 
 
         flash('Produto atualizado com sucesso')->success();
@@ -99,9 +107,8 @@ class ProductController extends Controller
         $uploadImages = [];
 
         foreach ($images as $image){
-            $uploadImages[] =  [$imageCollum => $image->store('products', 'public')];
+            array_push($uploadImages, [$imageCollum => $image->store('products', 'public')]);
         }
-
         return $uploadImages;
     }
 }

@@ -1,0 +1,11 @@
+btn-delete {
+    left: 0;
+}
+
+button.btn.btn-danger.position-absolute.btn-delete {
+    right: 5px;
+    margin: 0px auto;
+    height: 35px;
+    box-sizing: border-box;
+    top: 4px;
+}

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-        <form action="{{route('admin.products.update', ['product'=> $products->id])}}" method="POST">
+        <form action="{{route('admin.products.update', ['product'=> $products->id])}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
     <div class="row g-4">
@@ -36,8 +36,30 @@
                 @endforeach
             </select>
         </div>
+        <div class="col-6">
+            <div class="col-12">
+                <label for="image" class="form-label">Imagem</label>
+                <input name="images[]" multiple type="file" class="form-control">
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="box d-flex flex-row">
+                @foreach($products->images as $image)
 
+                <div class="position-relative border m-2">
+                    <img style="height: 200px; width:200px; object-fit: contain;" src="{{asset('/storage/' . $image->image)}}" alt="Produto nome"/>
+                    <form action="{{route('admin.delete.image')}}" method="POST">
+                        <input type="hidden" name="image" value="{{$image->image}}">
+                        @csrf
+                        <button class="btn btn-danger position-absolute btn-delete" type="submit"><i class="fas fa-trash"></i></button>
+                    </form>
+                </div>
+                @endforeach
+        </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg mt-3">Editar</button>
     </div>
-            <button type="submit" class="btn btn-success btn-lg mt-3">Editar</button>
         </form>
 @endsection

@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected  $table = 'products';
-
+    protected $table = 'products';
     protected $fillable = ['name', 'description', 'body', 'price', 'slug'];
-
 
     public function store()
     {
@@ -25,5 +23,4 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class);
     }
-
 }
