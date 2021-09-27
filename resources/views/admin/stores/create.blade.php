@@ -32,9 +32,15 @@
             <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
             @enderror
         </div>
+
         <div class="col-4">
             <label for="Slug" class="form-label">Slug</label>
             <input type="text" name="slug" id="id-5" class="form-control">
+        </div>
+
+        <div class="col-12">
+            <label for="image" class="form-label">Imagem</label>
+            <input name="logo" type="file" class="form-control">
         </div>
     </div>
             <button type="submit" class="btn btn-success btn-lg mt-3">Criar</button>

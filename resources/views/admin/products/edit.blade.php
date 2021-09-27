@@ -39,7 +39,10 @@
         <div class="col-6">
             <div class="col-12">
                 <label for="image" class="form-label">Imagem</label>
-                <input name="images[]" multiple type="file" class="form-control">
+                <input name="images[]" multiple type="file" class="form-control @error('images') is-invalid @enderror">
+                @error('images')
+                <span class="invalid-feedback">Arquivo de formato invalido</span>
+                @enderror
             </div>
         </div>
         <div class="col-12">
@@ -48,8 +51,8 @@
 
                 <div class="position-relative border m-2">
                     <img style="height: 200px; width:200px; object-fit: contain;" src="{{asset('/storage/' . $image->image)}}" alt="Produto nome"/>
-                    <form action="{{route('admin.delete.image')}}" method="POST">
-                        <input type="hidden" name="image" value="{{$image->image}}">
+                    <form name="formProduto" action="{{route('admin.delete.image')}}" method="POST">
+                        <input type="hidden" name="image" id="image-{{$image->id}}" value="{{$image->image}}">
                         @csrf
                         <button class="btn btn-danger position-absolute btn-delete" type="submit"><i class="fas fa-trash"></i></button>
                     </form>
@@ -63,3 +66,10 @@
     </div>
         </form>
 @endsection
+
+
+<script>
+    $('form[name=formProduto]').submit(function (event){
+        $()
+    });
+</script>

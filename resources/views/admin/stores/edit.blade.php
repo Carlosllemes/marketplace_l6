@@ -20,9 +20,15 @@
             <label for="Celular/Whatsapp" class="form-label">Celular/Whatsapp</label>
             <input type="text" name="mobile_phone" id="id-4" class="form-control" value="{{$store->mobile_phone}}">
         </div>
+
         <div class="col-4">
             <label for="Slug" class="form-label">Slug</label>
             <input type="text" name="slug" id="id-5" class="form-control" value="{{$store->slug}}">
+        </div>
+
+        <div class="col-12">
+            <label for="logo" class="form-label">logo</label>
+            <input name="logo" type="file" class="form-control">
         </div>
     </div>
             <button type="submit" class="btn btn-success btn-lg mt-3">Editar</button>

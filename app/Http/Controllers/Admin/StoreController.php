@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 use App\{Store, User};
 use App\Http\Requests\StoreRequest;
 use App\Http\Controllers\Controller;
+use App\Traits\UploadTrait;
 
 class StoreController extends Controller
 {
     private $stores;
+    use UploadTrait;
 
     public function __construct(Store $stores)
     {
@@ -31,6 +33,9 @@ class StoreController extends Controller
     {
         $data = $request->all();
         $user = auth()->user();
+        if ($request->hasFile('logo')){
+            $data['logo'] = $this->imageUpload($request);
+        }
         $user->store()->create($data);
 
         flash('Loja Criada com sucesso')->success();
@@ -40,15 +45,17 @@ class StoreController extends Controller
     public function edit($store)
     {
         $store = $this->stores->find($store);
-
         return view('admin.stores.edit', compact('store'));
     }
 
-    public function update(StoreRequest  $request , $store)
+    public function update(StoreRequest $request, $store)
     {
+        $store = $this->stores->find($store);
         $date = $request->all();
 
-        $store = $this->stores->find($store);
+        if ($request->hasFile('logo')){
+            $date['logo'] = $this->imageUpload($request, 'logo');
+        }
         $store->update($date);
 
         flash('Loja Atualiza com sucesso')->success();

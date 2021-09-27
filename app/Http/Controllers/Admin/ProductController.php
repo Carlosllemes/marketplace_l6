@@ -6,9 +6,11 @@ use App\{Product, Category};
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
 use \Illuminate\Http\Request;
+use App\Traits\UploadTrait;
 
 class ProductController extends Controller
 {
+    use UploadTrait;
 
     private $product;
 
@@ -102,13 +104,4 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index');
     }
 
-    private function imageUpload(Request $request, $imageCollum){
-        $images = $request->file('images');
-        $uploadImages = [];
-
-        foreach ($images as $image){
-            array_push($uploadImages, [$imageCollum => $image->store('products', 'public')]);
-        }
-        return $uploadImages;
-    }
 }

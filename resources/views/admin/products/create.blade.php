@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-        <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data" >
             @csrf
     <div class="row g-4">
         <div class="col-6">
@@ -50,10 +50,16 @@
 
         <div class="col-12">
             <label for="image" class="form-label">Imagem</label>
-            <input name="images[]" multiple type="file" class="form-control">
+            <input name="images[]" multiple type="file" class="form-control @error('images') is-invalid @enderror">
+            @error('images')
+            <span class="invalid-feedback">{{$message}}</span>
+            @enderror
         </div>
 
     </div>
             <button type="submit" class="btn btn-success btn-lg mt-3">Criar</button>
         </form>
 @endsection
+
+
+

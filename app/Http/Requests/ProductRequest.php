@@ -28,6 +28,7 @@ class ProductRequest extends FormRequest
             'description' => 'required|max:21|min:3',
             'body' => 'required|max:21|min:3',
             'price' => 'required',
+            'images' =>'image',
         ];
     }
 
@@ -37,6 +38,7 @@ class ProductRequest extends FormRequest
             'required' =>  'Campo obrigatorio',
             'max' => 'Maximo de 21 caracteres',
             'min' => 'Minimo de 3 caracteres',
+            'image' => 'O Arquivo nao e uma imagem valida',
         ];
     }
 }
