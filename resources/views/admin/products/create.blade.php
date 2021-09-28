@@ -43,10 +43,7 @@
             </select>
         </div>
 
-        <div class="col-6">
-            <label for="Slug" class="form-label mt-2">Slug</label>
-            <input type="text" name="slug" id="id-5" value="{{old('slug')}}" class="form-control">
-        </div>
+
 
         <div class="col-12">
             <label for="image" class="form-label">Imagem</label>

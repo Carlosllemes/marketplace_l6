@@ -41,6 +41,7 @@ return [
     |
     */
 
+//    ph1QoJU6
     'disks' => [
 
         'local' => [
@@ -54,6 +55,7 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+
         'products' => [
             'driver' => 'local',
             'root' => storage_path('app/public/products'),

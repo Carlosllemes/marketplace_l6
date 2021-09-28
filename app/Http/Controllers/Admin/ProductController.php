@@ -6,6 +6,7 @@ use App\{Product, Category};
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -42,9 +43,12 @@ class ProductController extends Controller
     {
 
         $data = $request->all();
+        $slug = Str::slug($data['name'], '-');
+        $data['slug'] = $slug;
         $store = auth()->user()->store;
         $product = $store->product()->create($data);
         $product->categories()->sync($data['categories']);
+
 
         if($request->hasFile('images')){
             $images = $this->imageUpload($request, 'image');
@@ -66,7 +70,7 @@ class ProductController extends Controller
 
     public function edit($product)
     {
-        $products = $this->product->find($product);
+        $products = $this->product->where('slug', $product)->first();
         $categories = Category::all(['id', 'name']);
 
 

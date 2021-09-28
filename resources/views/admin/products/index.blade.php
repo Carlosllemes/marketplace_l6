@@ -26,7 +26,7 @@
             <td>{{$p->images->count()}}</td>
             <td>
                <div class="btn btn-group">
-                   <a href="{{route('admin.products.edit', $p->id)}}" class="btn btn-primary">Editar</a>
+                   <a href="{{route('admin.products.edit', $p->slug)}}" class="btn btn-primary">Editar</a>
                    <form method="POST" action="{{route('admin.products.destroy', $p->id)}}">
                        @csrf
                        @method('DELETE')
