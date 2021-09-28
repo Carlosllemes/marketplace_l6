@@ -47,17 +47,17 @@
         </div>
         <div class="col-12">
             <div class="box d-flex flex-row">
-                @foreach($products->images as $image)
+                <form action="">
+                @csrf
+            @foreach($products->images as $image)
 
-                <div class="position-relative border m-2">
-                    <img style="height: 200px; width:200px; object-fit: contain;" src="{{asset('/storage/' . $image->image)}}" alt="Produto nome"/>
-                    <form name="formProduto" action="{{route('admin.delete.image')}}" method="POST">
+                    <div class="position-relative border m-2">
+                    <img style="height: 200px; width:200px; object-fit: contain;" src="{{asset('/storage/products/'.$image->image)}}" alt="Produto nome"/>
                         <input type="hidden" name="image" id="image-{{$image->id}}" value="{{$image->image}}">
-                        @csrf
-                        <button class="btn btn-danger position-absolute btn-delete" type="submit"><i class="fas fa-trash"></i></button>
-                    </form>
+                        <a class="btn btn-danger position-absolute btn-delete" data-name="{{$image->image}}"><i class="fas fa-trash"></i></a>
                 </div>
                 @endforeach
+                </form>
         </div>
 
         </div>
@@ -66,10 +66,6 @@
     </div>
         </form>
 @endsection
-
-
-<script>
-    $('form[name=formProduto]').submit(function (event){
-        $()
-    });
-</script>
+@section('footer-scripts')
+    <script src="{{ asset('js/scripts/deleteimg.js') }}" defer></script>
+@endsection

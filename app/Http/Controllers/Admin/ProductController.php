@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\{Product, Category};
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
-use \Illuminate\Http\Request;
 use App\Traits\UploadTrait;
 
 class ProductController extends Controller
@@ -77,15 +76,20 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, $product)
     {
+        //busca os dados digitados nos inputs
         $data = $request->all();
+        // busca o produto pelo parametro enviado via url
         $product = $this->product->find($product);
+        // cria a relacao de produtos com a categoria passada no input categories
         $product->categories()->sync($data['categories']);
-
+        //verifica se existe arquivos anexados dentro do input imags
         if($request->hasFile('images')){
+            // chama a funcao de upload de imagens
             $images = $this->imageUpload($request, 'image');
+            // cria a relacao entre imagem e produtos, createmany devido o returno da funcao ser um array
             $product->images()->createMany($images);
         }
-
+        // faz o update do produto com as iformacoes passada pelo usuario
         $product->update($data);
 
 

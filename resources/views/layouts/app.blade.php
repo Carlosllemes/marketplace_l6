@@ -98,4 +98,7 @@
         </main>
     </div>
 </body>
+<footer>
+    @yield('footer-scripts')
+</footer>
 </html>

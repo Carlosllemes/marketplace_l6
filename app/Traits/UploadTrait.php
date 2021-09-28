@@ -8,15 +8,14 @@ trait UploadTrait
 {
     private function imageUpload(Request $request, $imageCollum = null){
         $images = $request->file('images');
-        dd($images);
         $uploadImages = [];
 
-        if(is_array($images)){
-            foreach ($images as $image){
-                array_push($uploadImages, [$imageCollum => $image->store('products', 'public')]);
+        if(is_array($images)) {
+            foreach ($images as $image) {
+                $image->store('products', 'public');
+                $uploadImages[] = [$imageCollum => $image->hashName()];
             }
-        }else{
-            $uploadImages = $images->store('logo','public');
+
         }
 
         return $uploadImages;

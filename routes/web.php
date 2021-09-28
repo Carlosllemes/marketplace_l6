@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function(){
         });
         Route::resource('products', 'ProductController');
         Route::resource('categories', 'CategoryController');
-        Route::post('/products/delete', 'ProductImageController@delete')->name('delete.image');
+        Route::get('/products/delete/{image}', 'ProductImageController@delete')->name('delete.image');
 
     });
 });

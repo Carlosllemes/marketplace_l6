@@ -9,15 +9,14 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductImageController extends Controller
 {
-    public function delete(Request $request){
+    public function delete($image){
 
-        $imgName = $request->input('image');
 
-        if (Storage::disk('public')->exists($imgName)){
-            Storage::disk('public')->delete($imgName);
+        if (Storage::disk('products')->exists($image)){
+            Storage::disk('products')->delete($image);
         }
 
-        $productImage = ProductImage::where('image', $imgName);
+        $productImage = ProductImage::where('image', $image);
         $productImage->delete();
 
         flash('Foto removida com sucesso')->success();
