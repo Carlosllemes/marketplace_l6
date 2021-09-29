@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {return view('welcome');});
-
+Route::get('/products/{slug}', 'HomeController@single')->name('product.single');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Illuminate\Support\Str;
 use App\{Store, User};
 use App\Http\Requests\StoreRequest;
 use App\Http\Controllers\Controller;
@@ -32,6 +33,7 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->all();
+        $data['slug'] = Str::slug('name', '-');
         $user = auth()->user();
         if ($request->hasFile('logo')){
             $data['logo'] = $this->imageUpload($request);

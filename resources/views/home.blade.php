@@ -2,22 +2,32 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <h2 class="text-center mb-4">Produtos</h2>
 
-                    Bem vindo
-                </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+
+
+    @foreach( $products as $p)
+        <div class="col">
+        <div class="card">
+            @if($p->images->count())
+            <img src="{{asset('storage/products/').'/'.$p->images->first()->image}}" class="img-thumbnail" alt="...">
+            @else
+                <img src="{{asset('storage/assets/no-photo.jpg')}}" class="card-img-top img-thumbnail" alt="...">
+            @endif
+            <div class="card-body">
+                <h5 class="card-title">{{$p->name}}</h5>
+                <p class="card-text">{{$p->description}}</p>
+                <a href="{{route('product.single', ['slug' => $p->slug])}}" class="btn btn-primary">Saiba Mais</a>
             </div>
         </div>
+        </div>
+                @endforeach
+
+
+
     </div>
 </div>
 @endsection

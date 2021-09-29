@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\DB;
 use App\{Product, Category};
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
@@ -41,10 +42,9 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-
+        DB::beginTransaction();
         $data = $request->all();
-        $slug = Str::slug($data['name'], '-');
-        $data['slug'] = $slug;
+        $data['slug'] = Str::slug($data['name'], '-');
         $store = auth()->user()->store;
         $product = $store->product()->create($data);
         $product->categories()->sync($data['categories']);
@@ -54,6 +54,8 @@ class ProductController extends Controller
             $images = $this->imageUpload($request, 'image');
             $product->images()->createMany($images);
         }
+        DB::commit();
+
 
 
 
@@ -80,6 +82,7 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, $product)
     {
+        DB::beginTransaction();
         //busca os dados digitados nos inputs
         $data = $request->all();
         // busca o produto pelo parametro enviado via url
@@ -95,6 +98,7 @@ class ProductController extends Controller
         }
         // faz o update do produto com as iformacoes passada pelo usuario
         $product->update($data);
+        DB::commit();
 
 
 

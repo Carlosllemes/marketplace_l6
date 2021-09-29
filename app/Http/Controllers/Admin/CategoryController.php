@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -35,9 +37,11 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
+        DB::beginTransaction();
         $data = $request->all();
-
-        $category = $this->category->create($data);
+        $data['slug'] = Str::slug($data['name'], '-');
+        $this->category->create($data);
+        DB::commit();
 
         flash('Categoria Criado com Sucesso!')->success();
         return redirect()->route('admin.categories.index');
@@ -60,10 +64,12 @@ class CategoryController extends Controller
 
     public function update(CategoryRequest $request, $category)
     {
+        DB::beginTransaction();
         $data = $request->all();
 
         $category = $this->category->find($category);
         $category->update($data);
+        DB::commit();
 
         flash('Categoria Atualizada com Sucesso!')->success();
         return redirect()->route('admin.categories.index');
