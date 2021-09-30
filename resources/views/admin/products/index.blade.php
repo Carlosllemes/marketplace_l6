@@ -34,7 +34,7 @@
                <div class="btn btn-group">
                    <a href="{{route('admin.products.edit', $p->slug)}}" class="btn btn-primary ml-1"><i class="fa fa-edit"></i></a>
                    <a href="{{route('product.single', ['slug' => $p->slug])}}" class="btn btn-primary ml-1"><i class="fa fa-eye"></i></a>
-                   <a data-id="{{$p->id}}" class="btn btn-danger ml-1"><i class="fa fa-eye"></i></a>
+                   <a data-id="{{$p->id}}" class="btn btn-danger ml-1"><i style="color: #fff;" class="fa fa-trash"></i></a>
                </div>
             </td>
         </tr>

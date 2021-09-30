@@ -8,9 +8,9 @@
             <div class="col-3">
                 <div class="card">
             @if($p->images->count())
-            <img src="{{asset('storage/products').'/'.$p->images->first()->image}}" class="img-thumbnail" alt="...">
+            <img src="{{asset('storage/products').'/'.$p->images->first()->image}}" alt="...">
             @else
-                <img src="{{asset('storage/assets/no-photo.jpg')}}" class="card-img-top img-thumbnail" alt="...">
+                <img src="{{asset('storage/assets/no-photo.jpg')}}" class="card-img-top " alt="...">
             @endif
             <div class="card-body">
                 <h5 class="card-title">{{$p->name}}</h5>
