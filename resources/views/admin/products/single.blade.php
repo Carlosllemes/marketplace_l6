@@ -13,30 +13,17 @@
 
 <div class="row">
     <div class="col-6">
-        <div class="ecommerce-gallery">
-            <div class="row py-3 shadow-5" data-mdb-zoom-effect="true" data-mdb-auto-height="true">
-                <div class="col-12 mb-1">
-                    <div class="lightbox">
-                        <img
-                            src="{{asset('storage/products/') .'/'. $product->images()->first()->image}}"
-                            alt="Gallery image 1"
-                            class="ecommerce-gallery-main-img active w-100"
-                        />
-                    </div>
-                </div>
 
-                @foreach($product->images as $image)
-                <div class="col-3 mt-1">
-                    <img
-                        src="{{asset('storage/products').'/'. $image->image }}"
-                        data-mdb-img="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14a.jpg"
-                        alt="Gallery image 1"
-                        class="active w-100"
-                    />
-                </div>
-                @endforeach
-            </div>
-        </div>
+<div class="slick-slider custom">
+
+    <div class="single-item">
+        @foreach($product->images as $image)
+            <img class="slider-img slider-nav" src="{{asset('storage/products').'/'. $image->image }}"/>
+        @endforeach
+    </div>
+
+</div>
+
     </div>
     <div class="col-6">
         <nav>
@@ -51,6 +38,7 @@
         </div>
     </div>
 </div>
-
-
+@endsection
+@section('footer-scripts')
+    <script src="{{asset('js/scripts/single-item.js')}}"></script>
 @endsection
