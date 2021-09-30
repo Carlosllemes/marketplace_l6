@@ -21,10 +21,6 @@
             <label for="Preco" class="form-label">Preco</label>
             <input type="text" name="price" value="{{$products->price}}" id="id-4" class="form-control" value="{{$products->price}}">
         </div>
-        <div class="col-4">
-            <label for="Slug" class="form-label">Slug</label>
-            <input type="text" name="slug" value="{{$products->slug}}" id="id-5" class="form-control" value="{{$products->slug}}">
-        </div>
 
         <div class="col-6">
             <label class="form-label mt-2">Categorias</label>
@@ -47,15 +43,14 @@
         </div>
         <div class="col-12">
             <div class="box d-flex flex-row">
-                <form action="">
+                <form>
                 @csrf
-            @foreach($products->images as $image)
-
+                @foreach($products->images as $image)
                     <div class="position-relative border m-2">
-                    <img style="height: 200px; width:200px; object-fit: contain;" src="{{asset('/storage/products/'.$image->image)}}" alt="Produto nome"/>
-                        <input type="hidden" name="image" id="image-{{$image->id}}" value="{{$image->image}}">
-                        <a class="btn btn-danger position-absolute btn-delete" data-name="{{$image->image}}"><i class="fas fa-trash"></i></a>
-                </div>
+                        <img style="height: 200px; width:200px; object-fit: contain;" src="{{asset('/storage/products/'.$image->image)}}" alt="Produto nome"/>
+                            <input type="hidden" name="image" id="image-{{$image->id}}" value="{{$image->image}}">
+                            <a class="btn btn-danger position-absolute btn-delete" data-name="{{$image->image}}"><i class="fas fa-trash"></i></a>
+                    </div>
                 @endforeach
                 </form>
         </div>
@@ -68,4 +63,5 @@
 @endsection
 @section('footer-scripts')
     <script src="{{ asset('js/scripts/deleteimg.js') }}" defer></script>
+
 @endsection

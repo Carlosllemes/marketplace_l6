@@ -11,11 +11,11 @@ class StoreTableSeeder extends Seeder
      */
     public function run()
     {
-        $stores = \App\Store::all();
+        $users = \App\User::all();
 
-        foreach ($stores as $store)
+        foreach ($users as $user)
         {
-            $store->product()->save(factory(\App\Product::class)->make());
+            $user->store()->save(factory(\App\Store::class)->make());
         }
     }
 }

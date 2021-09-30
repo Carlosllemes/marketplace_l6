@@ -1,4 +1,6 @@
-$('.btn-danger').on('click', function (e){
+
+function deleteAjax (selector, path, dataType){
+$(selector).on('click', function (e){
     e.preventDefault();
     let el = $(this);
 
@@ -6,14 +8,17 @@ $('.btn-danger').on('click', function (e){
 
 
     $.ajax({
-        url: window.location.origin + '/admin/products/delete/' +  el.data('name'),
+        url: window.location.origin + path +  el.data(dataType),
         type:'GET',
-        success: function(result){
-
+        success: function(){
             el.parent().fadeOut('slow', function (){
                 $(this).remove()
             });
         },
-        error: function(){console.log('error')},
+        error: function(e){console.log(e)},
     })
 })
+}
+
+deleteAjax('.btn-danger', '/admin/products/delete/', 'name');
+

@@ -3,8 +3,13 @@
 
 @section('content')
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="{{route('home')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Categorias</li>
+        </ol>
+    </nav>
     <a href="{{route('admin.categories.create')}}" class="btn btn-lg btn-success">Criar Categoria</a>
-
     <table class="table table-striped">
         <thead>
         <tr>

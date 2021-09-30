@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"><a href="{{route('home')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Produtos</li>
+        </ol>
+    </nav>
     <a href="{{route('admin.products.create')}}" class="mt-3 btn btn-success">Criar Produto</a>
     <table class="table table-striped text-center">
         <thead>
@@ -26,12 +32,9 @@
             <td>{{$p->images->count()}}</td>
             <td>
                <div class="btn btn-group">
-                   <a href="{{route('admin.products.edit', $p->slug)}}" class="btn btn-primary">Editar</a>
-                   <form method="POST" action="{{route('admin.products.destroy', $p->id)}}">
-                       @csrf
-                       @method('DELETE')
-                       <button type="submit" class="btn btn-danger">Remover</button>
-                   </form>
+                   <a href="{{route('admin.products.edit', $p->slug)}}" class="btn btn-primary ml-1"><i class="fa fa-edit"></i></a>
+                   <a href="{{route('product.single', ['slug' => $p->slug])}}" class="btn btn-primary ml-1"><i class="fa fa-eye"></i></a>
+                   <a data-id="{{$p->id}}" class="btn btn-danger ml-1"><i class="fa fa-eye"></i></a>
                </div>
             </td>
         </tr>
@@ -41,5 +44,9 @@
     </table>
 
     {{$products->links()}}
+
+@endsection
+@section('footer-scripts')
+    <script src="{{ asset('js/scripts/deleteimg.js') }}" defer></script>
 
 @endsection

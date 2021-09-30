@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Product $product)
     {
-        $this->middleware('auth');
+        $this->product = $product;
     }
 
     /**
@@ -24,17 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $store = $user->store()->first();
-        $products = $store->product()->get();
-
-
-        return view('home' , compact('user', 'store', 'products'));
+        $products = $this->product->limit(20)->orderBy('id', 'DESC')->get();
+        return view('home' , compact('products'));
     }
 
     public function single($slug)
     {
-        $product = Product::where('slug', $slug)->first();
+        $product = $this->product->where('slug', $slug)->first();
 
         return view('admin.products.single', compact('product'));
     }

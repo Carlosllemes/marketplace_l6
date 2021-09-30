@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Faker\Provider\Lorem;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
@@ -26,7 +27,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|max:21|min:3',
             'description' => 'required|max:21|min:3',
-            'body' => 'required|max:21|min:3',
+            'body' => 'required|min:21',
             'price' => 'required',
         ];
     }

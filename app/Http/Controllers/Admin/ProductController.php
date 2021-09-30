@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\DB;
 use App\{Product, Category};
-use App\Http\Requests\ProductRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
@@ -40,7 +40,7 @@ class ProductController extends Controller
     }
 
 
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
         DB::beginTransaction();
         $data = $request->all();
@@ -80,7 +80,7 @@ class ProductController extends Controller
     }
 
 
-    public function update(ProductRequest $request, $product)
+    public function update(Request $request, $product)
     {
         DB::beginTransaction();
         //busca os dados digitados nos inputs

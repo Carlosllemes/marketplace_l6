@@ -6,8 +6,8 @@ $factory->define(\App\Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'description' => $faker->sentence,
-        'body' => $faker->paragraph(5, true),
+        'body' => $faker->paragraph(10, true),
         'price' => $faker->randomFloat(2,1 , 10),
-        'slug' => $faker->slug,
+        'slug' => $faker->slug('3'),
     ];
 });
