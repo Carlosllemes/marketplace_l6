@@ -15,9 +15,12 @@
 <div class="slick-slider custom">
 
     <div class="single-item">
-        @foreach($product->images as $image)
-            <img class="slider-img slider-nav" src="{{asset('storage/products').'/'. $image->image }}"/>
-        @endforeach
+        @if($product->images->count())
+            @foreach($product->images as $image)
+                <img class="slider-img slider-nav" src="{{asset('storage/products').'/'. $image->image }}"/>
+            @endforeach
+        @endif
+            <img src="{{asset('storage/assets/no-photo.jpg')}}" class="card-img-top " alt="...">
     </div>
 
 </div>
@@ -43,10 +46,19 @@
                 <span class="badge bg-info">{{$category->name}}</span>
             @endforeach
         </p>
-        <form action="">
-            <label for="amount" class="form-label">Quantidade</label>
-            <input class="form-control w-25" name="amount" type="number" value="1">
-            <button class="btn btn-success mt-3">Comprar</button>
+        <form method="POST" action="{{route('cart.cart.store')}}">
+            @csrf
+            <input value="{{$product->name}}" name="product[name]" type="text" hidden>
+            <input value="{{$product->price}}" name="product[price]" type="text" hidden>
+            <input value="{{$product->slug}}" name="product[slug]" type="text" hidden>
+            <input value="{{$product->price}}" name="product[product]" type="text" hidden>
+            <input value="{{$product->categories()->first()->name}}" name="product[category]" type="text" hidden>
+            <input value="{{$product->images()->first()->image}}" name="product[image]" type="text" hidden>
+            <div class="form-group">
+                <label for="amount" class="form-label">Quantidade</label>
+                <input class="form-control w-25" name="product[amount]" type="number" value="1">
+                <button class="btn btn-success mt-3">Comprar</button>
+            </div>
         </form>
     </div>
     <div class="container">

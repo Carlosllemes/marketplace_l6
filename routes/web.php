@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', function () {return view('welcome');});
-Route::get('/products/{slug}', 'HomeController@single')->name('product.single');
 Auth::routes();
-
+Route::get('/', function () {return view('welcome');});
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/products/{slug}', 'HomeController@single')->name('product.single');
+
+Route::prefix('cart')->name('cart.')->namespace('Cart')->group(function (){
+   Route::resource('cart', 'CartController');
+});
 
 Route::group(['middleware' => ['auth']], function(){
     Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function (){
@@ -28,11 +31,10 @@ Route::group(['middleware' => ['auth']], function(){
             Route::delete('/destroy/{store}/', 'StoreController@destroy')->name('destroy');
         });
         Route::resource('products', 'ProductController');
-
         Route::resource('categories', 'CategoryController');
-
+        //gambs do ajax
         Route::get('/products/delete/{image}', 'ProductImageController@delete')->name('delete.image');
-
+        //fim gambs ajax
     });
 });
 

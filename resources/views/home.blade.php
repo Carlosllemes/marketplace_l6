@@ -13,7 +13,8 @@
                 <img src="{{asset('storage/assets/no-photo.jpg')}}" class="card-img-top " alt="...">
             @endif
             <div class="card-body">
-                <h5 class="card-title">{{$p->name}}</h5>
+                <h2 class="cart-title">R$ {{number_format($p->price, 2, ',','.')}}</h2>
+                <h5 class="card-text">{{$p->name}}</h5>
                 <p class="card-text">{{$p->description}}</p>
                 <a href="{{route('product.single', ['slug' => $p->slug])}}" class="btn btn-primary">Saiba Mais</a>
             </div>

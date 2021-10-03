@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Warning;
 use App\{Product, Category};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,10 +24,15 @@ class ProductController extends Controller
 
     public function index()
     {
-        $userStore = auth()->user()->store;
-        $products = $userStore->product()->paginate(10);
+        if ($userStore = auth()->user()->store){
+            $products = $userStore->product()->paginate(10);
+            return view('admin.products.index', compact('products'));
+        }else{
+            $message = flash('Voce precisa criar uma loja')->warning();
+            return redirect(route('admin.stores.create', compact('message')));
+        }
 
-        return view('admin.products.index', compact('products'));
+
     }
 
 

@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
          for ($i=0; $i<5; $i++){
          $this->call(ProductImageTableSeeder::class);
          }
+         $this->call(CategoryTableSeeder::class);
     }
 }
