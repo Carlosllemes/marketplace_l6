@@ -7,5 +7,3 @@ $(document).ready(function(){
         slidesToScroll: 3
     });
 });
-
-

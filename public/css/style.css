@@ -26,3 +26,28 @@ a.btn.btn-danger.position-absolute.btn-delete {
     border-radius: 5px;
 }
 
+.aside-product {
+    background: #e9ecef;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #fefefe;
+    height: auto;
+}
+
+.aside-product h2 {color: #494747;}
+
+.aside-product h2::after {content: '';display: block;height: 2px;background: #5dc273;width: 40%;margin-top: 4px;}
+
+.aside-product-desc {
+    font-size: 15px;
+    color: #494747;
+    font-style: italic;
+}
+
+.aside-product-price {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.aside-product-desc::after {content: ' ';height: 1px;width: 100%;display: block;background: #fefefe;}

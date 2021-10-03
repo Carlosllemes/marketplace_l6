@@ -9,10 +9,8 @@
     </ol>
 </nav>
 <hr>
-<h2 class="text-uppercase font-weight-bold">{{$product->name}}</h2>
-
 <div class="row">
-    <div class="col-6">
+    <div class="col-md-8 slider-product">
 
 <div class="slick-slider custom">
 
@@ -25,7 +23,34 @@
 </div>
 
     </div>
-    <div class="col-6">
+    <div class="col-md-4 aside-product">
+        <h2 class="text-uppercase font-weight-bold">
+            {{$product->name}}
+        </h2>
+        <p class="aside-product-desc">
+            {{$product->description}}
+        </p>
+        <p class="aside-product-price-before">
+            de: {{number_format(($product->price) + ($product->price * 10) / 100, 2,",", ".")}}
+        </p>
+        <span class="d-block">Por</span>
+        <p class="aside-product-price">
+            R$: {{number_format($product->price, 2, ",", ".")}}
+        </p>
+        <p class="aside-product-category">
+            Categoria
+            @foreach($product->categories as $category)
+                <span class="badge bg-info">{{$category->name}}</span>
+            @endforeach
+        </p>
+        <form action="">
+            <label for="amount" class="form-label">Quantidade</label>
+            <input class="form-control w-25" name="amount" type="number" value="1">
+            <button class="btn btn-success mt-3">Comprar</button>
+        </form>
+    </div>
+    <div class="container">
+    <div class="col-md-12 mt-3">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Produto</a>
@@ -33,9 +58,12 @@
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">{{$product->body}}</div>
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <div class="container"><p>{{$product->body}}</p></div>
+            </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">{{$product->description}}</div>
         </div>
+    </div>
     </div>
 </div>
 @endsection
