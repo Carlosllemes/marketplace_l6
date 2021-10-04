@@ -17,6 +17,7 @@ class CartController extends Controller
     {
         $products = session()->get('cart');
 
+
         return view('cart.index', compact('products'));
     }
 
@@ -86,11 +87,21 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $slug
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        if (!session()->has('cart')) {return redirect()->route('cart.cart.index');}
+
+        $products = session('cart');
+        $products = array_filter($products, function($line) use($slug){
+            return $line['slug'] != $slug;
+        });
+
+
+        session()->put('cart',$products);
+        return redirect()->route('cart.cart.index');
     }
+
 }

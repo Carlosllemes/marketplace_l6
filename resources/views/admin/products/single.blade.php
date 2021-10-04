@@ -49,7 +49,6 @@
         <form method="POST" action="{{route('cart.cart.store')}}">
             @csrf
             <input value="{{$product->name}}" name="product[name]" type="text" hidden>
-            <input value="{{$product->price}}" name="product[price]" type="text" hidden>
             <input value="{{$product->slug}}" name="product[slug]" type="text" hidden>
             <input value="{{$product->price}}" name="product[product]" type="text" hidden>
             <input value="{{$product->categories()->first()->name}}" name="product[category]" type="text" hidden>

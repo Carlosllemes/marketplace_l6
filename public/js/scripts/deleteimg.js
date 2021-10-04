@@ -21,4 +21,3 @@ $(selector).on('click', function (e){
 }
 
 deleteAjax('.btn-danger', '/admin/products/delete/', 'name');
-

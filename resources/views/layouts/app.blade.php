@@ -73,6 +73,7 @@
                                 </div>
                             </li>
                         @endguest
+                            <a class="nav-link" href="{{ route('cart.cart.index') }}"><i class="fas fa-shopping-cart"></i></a>
                     </ul>
                 </div>
             </div>
