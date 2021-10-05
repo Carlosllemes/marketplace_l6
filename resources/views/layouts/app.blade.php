@@ -73,7 +73,13 @@
                                 </div>
                             </li>
                         @endguest
-                            <a class="nav-link" href="{{ route('cart.cart.index') }}"><i class="fas fa-shopping-cart"></i></a>
+                            <li>
+                                <a class="nav-link" href="{{ route('cart.cart.index') }}"><i class="fas fa-shopping-cart"></i>
+                                    @if(session()->get('cart'))
+                                    {{count(session()->get('cart'))}}
+                                    @endif
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
