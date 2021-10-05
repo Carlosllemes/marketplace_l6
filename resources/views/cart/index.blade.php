@@ -8,7 +8,11 @@
         <aside class="col-lg-9">
             <div class="card">
                 <div class="table-responsive">
-                    <table class="table table-borderless table-shopping-cart">
+                    @php
+                        $total = 0;
+                    @endphp
+                    @if($products)
+                        <table class="table table-borderless table-shopping-cart">
                         <thead class="text-muted">
                             <tr class="small text-uppercase">
                                 <th scope="col">Produto</th>
@@ -18,9 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php
-                        $total = 0;
-                        @endphp
+
                         @foreach($products as $product)
                             <tr>
                                 <td>
@@ -59,6 +61,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    @endif
                 </div>
             </div>
         </aside>
@@ -80,8 +83,10 @@
                         <p class="text-right text-dark b ml-3">R$: <strong>{{number_format($total, 2, ',', '.')}}</strong></p>
                     </div>
                     <hr>
-                    <a href="#" class="btn btn-out btn-success btn-square btn-main" data-abc="true"> Comprar </a>
-                    <a href="#" class="btn btn-out btn-primary btn-square btn-main mt-2" data-abc="true">Continuar comprando</a>
+                    <a href="" class="btn btn-out btn-success btn-square btn-main" data-abc="true"> Comprar </a>
+                    <a href="{{route('home')}}" class="btn btn-out btn-primary btn-square btn-main mt-2" data-abc="true">Continuar comprando</a>
+                    <a href="{{route('cart.cancel')}}" class="btn btn-out btn-danger btn-square btn-main mt-2" data-abc="true">Cancelar Compra</a>
+
                 </div>
             </div>
         </aside>

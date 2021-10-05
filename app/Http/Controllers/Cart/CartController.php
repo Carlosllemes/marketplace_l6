@@ -16,8 +16,6 @@ class CartController extends Controller
     public function index()
     {
         $products = session()->get('cart');
-
-
         return view('cart.index', compact('products'));
     }
 
@@ -101,6 +99,13 @@ class CartController extends Controller
 
 
         session()->put('cart',$products);
+        return redirect()->route('cart.cart.index');
+    }
+
+    public function cancel()
+    {
+        session()->forget('cart');
+        flash('Compra Cancelada')->success();
         return redirect()->route('cart.cart.index');
     }
 

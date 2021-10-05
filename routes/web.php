@@ -17,7 +17,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/products/{slug}', 'HomeController@single')->name('product.single');
 
 Route::prefix('cart')->name('cart.')->namespace('Cart')->group(function (){
-   Route::resource('cart', 'CartController');
+    Route::get('cancel', 'CartController@cancel')->name('cancel');
+    Route::resource('cart', 'CartController');
 });
 
 Route::group(['middleware' => ['auth']], function(){
