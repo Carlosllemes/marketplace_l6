@@ -16,9 +16,14 @@ Route::get('/', function () {return view('welcome');});
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/products/{slug}', 'HomeController@single')->name('product.single');
 
+
 Route::prefix('cart')->name('cart.')->namespace('Cart')->group(function (){
     Route::get('cancel', 'CartController@cancel')->name('cancel');
     Route::resource('cart', 'CartController');
+});
+
+Route::prefix('checkout')->name('checkout.')->group(function(){
+    Route::get('/', 'CheckoutController@index')->name('index');
 });
 
 Route::group(['middleware' => ['auth']], function(){
