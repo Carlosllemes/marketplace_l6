@@ -13,7 +13,8 @@
         "laracasts/flash": "^3.2",
         "laravel/framework": "6.0.*",
         "laravel/tinker": "^1.0",
-        "laravel/ui": "1.2.*"
+        "laravel/ui": "1.2.*",
+        "pagseguro/pagseguro-php-sdk": "^6.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
