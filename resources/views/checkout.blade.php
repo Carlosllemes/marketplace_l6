@@ -56,6 +56,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="form-group stallments">
+
+                    </div>
+                </div>
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Continue o checkout</button>
             </form>
@@ -67,32 +72,69 @@
     <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     <script>
         const sessionId = '{{session()->get('pagseguro_session_code')}}';
-
         PagSeguroDirectPayment.setSessionId(sessionId)
-    </script>
-
-    <script>
         let cardNumber = document.querySelector('input[name=cc-numero]');
         let spanBrand = document.querySelector('span.brand');
-        cardNumber.addEventListener('keyup', function (){
-            if (cardNumber.value.length >= 6){
-                PagSeguroDirectPayment.getBrand({
 
+        //card number
+        cardNumber.addEventListener('keyup', function (){
+            if (cardNumber.value.length == 6){
+                PagSeguroDirectPayment.getBrand({
                     cardBin: cardNumber.value.substr(0, 6),
                     success: function (res){
+
                         let cardFlag = `<img src="https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/68x30/${res.brand.name}.png">`
                         spanBrand.innerHTML = cardFlag;
+                        getInstallments({{session()->get('total')}}, res.brand.name);
+
                     },
                     error: function (err){
-                      //console.log('Erro '+err)
+                        spanBrand.innerHTML = 'cartao invalido';
                     },
-                    complete: function (res){
-                        //console.log('AAAAA ' + res)
-                    },
-
-
                 })
             }
-            });
+        })
+        //end get card number
+
+
+        // get installments
+        function getInstallments(amount, brand){
+            PagSeguroDirectPayment.getInstallments({
+                amount: amount,
+                brand: brand,
+                maxInstallmentNoInterest:0,
+                success: function (res){
+                    let selectInstallments = drawSelectInstallments(res.installments['visa'])
+                    document.querySelector('div.stallments').innerHTML = selectInstallments;
+                },
+                error: function (err){
+                    console.log(err);
+                },
+            })
+        }
+        //end get installments
+
+
+        //draw select installments
+        function drawSelectInstallments(installments) {
+            let select = '<label>Opções de Parcelamento:</label>';
+
+            select += '<select class="form-control">';
+
+            for(let l of installments) {
+                select += `<option value="${l.quantity}|${l.installmentAmount}">${l.quantity}x de ${l.installmentAmount} - Total fica ${l.totalAmount}</option>`;
+            }
+
+
+            select += '</select>';
+
+            return select;
+	    }
+        //end draw select installments
+
+
+
+
+
     </script>
 @endsection
