@@ -18,10 +18,6 @@
                         <input id="debito" name="paymentMethod" type="radio" class="custom-control-input" required="">
                         <label class="custom-control-label" for="debito">Cartão de débito</label>
                     </div>
-                    <div class="custom-control custom-radio">
-                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                        <label class="custom-control-label" for="paypal">PayPal</label>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -55,14 +51,15 @@
                             Código de segurança é obrigatório.
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group stallments">
+                    <div class="col-md-12">
+                        <div class="form-group stallments">
 
+                        </div>
                     </div>
                 </div>
+
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue o checkout</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Comprar</button>
             </form>
         </div>
             @include('layouts.components.aside')
@@ -117,7 +114,7 @@
 
         //draw select installments
         function drawSelectInstallments(installments) {
-            let select = '<label>Opções de Parcelamento:</label>';
+            let select = '<label class="form-label">Opções de Parcelamento:</label>';
 
             select += '<select class="form-control">';
 
